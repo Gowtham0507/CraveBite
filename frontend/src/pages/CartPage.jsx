@@ -78,7 +78,13 @@ const CartPage = () => {
         return (
             <div className="w-full flex justify-center py-20 px-4">
                 <div className="text-center max-w-lg">
-                    <div className="text-6xl mb-4"></div>
+                    <div className="flex justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 text-gray-300">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                    </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Your cart is empty</h2>
                     <p className="text-gray-500 mb-6">Looks like you haven't added anything yet.</p>
                     <Link to="/" className="inline-block bg-gradient-to-r from-orange-500 to-rose-500 text-white px-8 py-3 rounded-full font-bold shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-0.5">Explore Restaurants</Link>
@@ -185,7 +191,10 @@ const CartPage = () => {
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                                        
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                                            <rect x="2" y="5" width="20" height="14" rx="2" ry="2" />
+                                            <line x1="2" y1="10" x2="22" y2="10" />
+                                        </svg>
                                     </div>
                                     <div className="text-left">
                                         <div className="font-bold text-gray-900">Pay Online</div>
@@ -199,7 +208,12 @@ const CartPage = () => {
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                                        
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                                            <circle cx="12" cy="12" r="2" />
+                                            <line x1="6" y1="12" x2="6.01" y2="12" />
+                                            <line x1="18" y1="12" x2="18.01" y2="12" />
+                                        </svg>
                                     </div>
                                     <div className="text-left">
                                         <div className="font-bold text-gray-900">Cash on Delivery</div>

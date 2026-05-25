@@ -21,7 +21,9 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
                 <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
                     <div className="w-10 h-10 bg-gradient-to-tr from-orange-500 to-rose-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg hover:rotate-6 transition-transform">
-                        ️
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                            <path d="M12 2v3M9 2v3M15 2v3M4 11h16a1 1 0 0 1 1 1v3.5a5.5 5.5 0 0 1-5.5 5.5h-7A5.5 5.5 0 0 1 3 15.5V12a1 1 0 0 1 1-1z" />
+                        </svg>
                     </div>
                     <span className="font-extrabold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-rose-600 tracking-tight">
                         CraveBite

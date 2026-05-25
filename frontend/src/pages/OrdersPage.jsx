@@ -157,7 +157,13 @@ const OrdersPage = () => {
             
             {orders.length === 0 ? (
                 <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
-                    <div className="text-6xl mb-4"></div>
+                    <div className="flex justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 text-gray-300">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 0 1-8 0" />
+                        </svg>
+                    </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">No orders yet</h2>
                     <p className="text-gray-500 mb-6">You haven't placed any orders. Start exploring!</p>
                     <Link to="/" className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-3 rounded-full font-bold shadow hover:shadow-lg transition-transform hover:-translate-y-0.5">Explore Food</Link>

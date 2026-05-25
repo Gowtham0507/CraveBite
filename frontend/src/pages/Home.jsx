@@ -179,7 +179,12 @@ const Home = () => {
                 </div>
             ) : restaurants.length === 0 ? (
                 <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100 mt-10">
-                    <div className="text-6xl mb-4">️</div>
+                    <div className="flex justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 text-gray-300">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
                     <h3 className="text-xl font-semibold text-gray-700">No live restaurants available here just yet!</h3>
                     <p className="text-gray-500 mt-2">Try searching a major Indian city like 'Hyderabad' or 'Bangalore'.</p>
                 </div>
@@ -195,7 +200,10 @@ const Home = () => {
                                         ⭐ {restaurant.rating}
                                     </span>
                                     <span className="bg-orange-500/80 backdrop-blur-md text-white border border-orange-400 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                                        ️ {restaurant.deliveryTime}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-3.5 h-3.5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        {restaurant.deliveryTime}
                                     </span>
                                 </div>
                             </div>
