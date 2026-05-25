@@ -17,6 +17,7 @@ CraveBite is a comprehensive, full-stack food delivery application featuring a r
 - **Backend:** Powered by Java 17 and Spring Boot for robust enterprise-level performance. Utilizes Spring Security for endpoint protection and data security.
 - **Database:** MongoDB acts as the primary NoSQL data store, handling complex, nested JSON objects (like restaurant menus and order items) with high scalability.
 - **Build Tools:** Maven for backend dependency management, Node/npm for the frontend ecosystem.
+- **Testing:** Includes comprehensive test configurations and robust mock integrations for external APIs.
 
 ## Project Setup Instructions
 
