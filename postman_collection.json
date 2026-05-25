@@ -1,173 +1,430 @@
 {
     "info": {
-        "name": "Food Ordering System",
-        "description": "API endpoints for the full-stack food ordering application.",
+        "name": "CraveBite - Full API Collection",
+        "description": "Complete API collection for the CraveBite food ordering system. Base URL variable: {{base_url}} = http://localhost:8080. After login, copy the token and set it as {{jwt_token}} in your Postman environment.",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8080",
+            "type": "string"
+        },
+        {
+            "key": "jwt_token",
+            "value": "PASTE_YOUR_TOKEN_HERE",
+            "type": "string"
+        }
+    ],
     "item": [
         {
-            "name": "Authentication",
+            "name": "1. Authentication",
             "item": [
                 {
                     "name": "Register User",
                     "request": {
                         "method": "POST",
-                        "header": [
-                            { "key": "Content-Type", "value": "application/json" }
-                        ],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"USER\"\n}"
+                            "raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"testuser@example.com\",\n    \"password\": \"password123\",\n    \"phoneNumber\": \"9876543210\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/auth/register",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
+                            "raw": "{{base_url}}/api/auth/register",
+                            "host": ["{{base_url}}"],
                             "path": ["api", "auth", "register"]
-                        }
+                        },
+                        "description": "Register a new customer. No auth required."
                     }
                 },
                 {
                     "name": "Login User",
                     "request": {
                         "method": "POST",
-                        "header": [
-                            { "key": "Content-Type", "value": "application/json" }
-                        ],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}"
+                            "raw": "{\n    \"email\": \"testuser@example.com\",\n    \"password\": \"password123\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/auth/login",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
+                            "raw": "{{base_url}}/api/auth/login",
+                            "host": ["{{base_url}}"],
                             "path": ["api", "auth", "login"]
-                        }
+                        },
+                        "description": "Login and get JWT token. Copy the token from response and set it as {{jwt_token}} in your environment."
+                    }
+                },
+                {
+                    "name": "Login as Admin",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"admin@cravebite.com\",\n    \"password\": \"admin123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "login"]
+                        },
+                        "description": "Login as default admin. Default credentials: admin@cravebite.com / admin123"
                     }
                 }
             ]
         },
         {
-            "name": "Restaurants & Foods",
+            "name": "2. Restaurants",
             "item": [
                 {
                     "name": "Get All Restaurants",
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8080/api/restaurants",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
+                            "raw": "{{base_url}}/api/restaurants",
+                            "host": ["{{base_url}}"],
                             "path": ["api", "restaurants"]
-                        }
+                        },
+                        "description": "Get all restaurants in the DB. No auth required."
                     }
                 },
                 {
-                    "name": "Get Restaurant By Id",
+                    "name": "Get Restaurant by ID",
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8080/api/restaurants/1",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
-                            "path": ["api", "restaurants", "1"]
-                        }
+                            "raw": "{{base_url}}/api/restaurants/RESTAURANT_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "restaurants", "RESTAURANT_ID_HERE"]
+                        },
+                        "description": "Replace RESTAURANT_ID_HERE with an actual ID from Get All Restaurants."
                     }
                 },
                 {
-                    "name": "Get Food by Restaurant",
+                    "name": "Get Restaurants Near Location",
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8080/api/foods/restaurant/1",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
-                            "path": ["api", "foods", "restaurant", "1"]
-                        }
+                            "raw": "{{base_url}}/api/restaurants?lat=17.385044&lng=78.486671",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "restaurants"],
+                            "query": [
+                                { "key": "lat", "value": "17.385044" },
+                                { "key": "lng", "value": "78.486671" }
+                            ]
+                        },
+                        "description": "Get restaurants filtered by GPS coordinates (Hyderabad default)."
                     }
                 }
             ]
         },
         {
-            "name": "Cart",
+            "name": "3. Food Items",
             "item": [
                 {
-                    "name": "Get Cart",
+                    "name": "Get All Foods",
                     "request": {
                         "method": "GET",
-                        "header": [
-                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
-                        ],
                         "url": {
-                            "raw": "http://localhost:8080/api/cart",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
-                            "path": ["api", "cart"]
-                        }
+                            "raw": "{{base_url}}/api/foods",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "foods"]
+                        },
+                        "description": "Get all food items across all restaurants. No auth required."
                     }
                 },
                 {
-                    "name": "Add To Cart",
+                    "name": "Get Foods by Restaurant",
                     "request": {
-                        "method": "POST",
-                        "header": [
-                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
-                        ],
+                        "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8080/api/cart/add?foodItemId=1&quantity=2",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
-                            "path": ["api", "cart", "add"],
-                            "query": [
-                                { "key": "foodItemId", "value": "1" },
-                                { "key": "quantity", "value": "2" }
-                            ]
-                        }
+                            "raw": "{{base_url}}/api/foods/restaurant/RESTAURANT_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "foods", "restaurant", "RESTAURANT_ID_HERE"]
+                        },
+                        "description": "Get all food items for a specific restaurant. Replace RESTAURANT_ID_HERE."
                     }
                 }
             ]
         },
         {
-            "name": "Orders",
+            "name": "4. Swiggy Proxy",
+            "item": [
+                {
+                    "name": "Get Live Swiggy Restaurants",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/swiggy/restaurants?lat=17.385044&lng=78.486671",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "swiggy", "restaurants"],
+                            "query": [
+                                { "key": "lat", "value": "17.385044" },
+                                { "key": "lng", "value": "78.486671" }
+                            ]
+                        },
+                        "description": "Fetches live restaurants from Swiggy API and saves them to local DB. No auth required."
+                    }
+                },
+                {
+                    "name": "Get Swiggy Menu for Restaurant",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/swiggy/menu/RESTAURANT_ID_HERE?lat=17.385044&lng=78.486671",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "swiggy", "menu", "RESTAURANT_ID_HERE"],
+                            "query": [
+                                { "key": "lat", "value": "17.385044" },
+                                { "key": "lng", "value": "78.486671" }
+                            ]
+                        },
+                        "description": "Fetches and saves live menu for a restaurant from Swiggy. No auth required."
+                    }
+                }
+            ]
+        },
+        {
+            "name": "5. Cart (Requires JWT)",
+            "item": [
+                {
+                    "name": "Get My Cart",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/cart",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cart"]
+                        },
+                        "description": "Get the logged-in user's current cart."
+                    }
+                },
+                {
+                    "name": "Add Item to Cart",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/cart/add?foodItemId=FOOD_ID_HERE&quantity=2",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cart", "add"],
+                            "query": [
+                                { "key": "foodItemId", "value": "FOOD_ID_HERE" },
+                                { "key": "quantity", "value": "2" }
+                            ]
+                        },
+                        "description": "Add a food item to cart. Replace FOOD_ID_HERE with actual food item ID."
+                    }
+                },
+                {
+                    "name": "Update Cart Item Quantity",
+                    "request": {
+                        "method": "PUT",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/cart/update?cartItemId=CART_ITEM_ID&quantity=3",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cart", "update"],
+                            "query": [
+                                { "key": "cartItemId", "value": "CART_ITEM_ID" },
+                                { "key": "quantity", "value": "3" }
+                            ]
+                        },
+                        "description": "Update quantity of a specific cart item. If quantity = 0 it removes the item."
+                    }
+                },
+                {
+                    "name": "Remove Item from Cart",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/cart/remove/CART_ITEM_ID",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cart", "remove", "CART_ITEM_ID"]
+                        },
+                        "description": "Remove a specific item from the cart."
+                    }
+                },
+                {
+                    "name": "Clear Cart",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/cart/clear",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cart", "clear"]
+                        },
+                        "description": "Clear all items from the logged-in user's cart."
+                    }
+                }
+            ]
+        },
+        {
+            "name": "6. Orders (Requires JWT)",
             "item": [
                 {
                     "name": "Place Order",
                     "request": {
                         "method": "POST",
                         "header": [
-                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+                            { "key": "Content-Type", "value": "application/json" }
                         ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"paymentMethod\": \"ONLINE\",\n    \"deliveryAddress\": \"123 Main Street, Hyderabad, Telangana\",\n    \"deliveryPhoneNumber\": \"9876543210\"\n}"
+                        },
                         "url": {
-                            "raw": "http://localhost:8080/api/orders",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
+                            "raw": "{{base_url}}/api/orders",
+                            "host": ["{{base_url}}"],
                             "path": ["api", "orders"]
-                        }
+                        },
+                        "description": "Place an order from the current cart. paymentMethod: ONLINE or COD."
                     }
                 },
                 {
-                    "name": "Get User Orders",
+                    "name": "Get My Orders",
                     "request": {
                         "method": "GET",
-                        "header": [
-                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
-                        ],
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
                         "url": {
-                            "raw": "http://localhost:8080/api/orders",
-                            "protocol": "http",
-                            "host": ["localhost"],
-                            "port": "8080",
+                            "raw": "{{base_url}}/api/orders",
+                            "host": ["{{base_url}}"],
                             "path": ["api", "orders"]
-                        }
+                        },
+                        "description": "Get all orders placed by the logged-in user."
+                    }
+                },
+                {
+                    "name": "Get Order by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "orders", "ORDER_ID_HERE"]
+                        },
+                        "description": "Get a specific order by its ID."
+                    }
+                },
+                {
+                    "name": "Cancel Order",
+                    "request": {
+                        "method": "PUT",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/cancel/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "orders", "cancel", "ORDER_ID_HERE"]
+                        },
+                        "description": "Cancel an order. Only works if order is still in WAITING_CONFIRMATION status."
+                    }
+                },
+                {
+                    "name": "[ADMIN] Get All Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/all",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "orders", "all"]
+                        },
+                        "description": "Admin only: Get all orders from all users."
+                    }
+                },
+                {
+                    "name": "[ADMIN] Accept Order",
+                    "request": {
+                        "method": "PUT",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/accept/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "orders", "accept", "ORDER_ID_HERE"]
+                        },
+                        "description": "Admin only: Accept an order. Moves status to ACCEPTED."
+                    }
+                },
+                {
+                    "name": "[ADMIN] Reject Order",
+                    "request": {
+                        "method": "PUT",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/reject/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "orders", "reject", "ORDER_ID_HERE"]
+                        },
+                        "description": "Admin only: Reject an order. Moves status to REJECTED."
+                    }
+                }
+            ]
+        },
+        {
+            "name": "7. Payments (Requires JWT)",
+            "item": [
+                {
+                    "name": "Create Razorpay Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/payment/create-order/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "payment", "create-order", "ORDER_ID_HERE"]
+                        },
+                        "description": "Registers a payment order with Razorpay. Returns razorpayOrderId, key, and amount. Call this first before verifying."
+                    }
+                },
+                {
+                    "name": "Verify Razorpay Payment",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"orderId\": \"YOUR_ORDER_ID\",\n    \"razorpayPaymentId\": \"pay_XXXXXXXXXXXX\",\n    \"razorpayOrderId\": \"order_XXXXXXXXXXXX\",\n    \"razorpaySignature\": \"SIGNATURE_STRING\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/payment/verify",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "payment", "verify"]
+                        },
+                        "description": "Verifies a Razorpay payment signature. On success, order status moves to PREPARING and a confirmation email is sent."
+                    }
+                },
+                {
+                    "name": "Process Cash on Delivery (COD)",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/payment/cod/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "payment", "cod", "ORDER_ID_HERE"]
+                        },
+                        "description": "Confirm a Cash on Delivery order. Order must be ACCEPTED by admin first. Moves status to PREPARING."
+                    }
+                },
+                {
+                    "name": "Simulate PhonePe Payment Success",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+                        "url": {
+                            "raw": "{{base_url}}/api/payment/mock-success/ORDER_ID_HERE",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "payment", "mock-success", "ORDER_ID_HERE"]
+                        },
+                        "description": "Simulates a successful UPI/PhonePe payment without real gateway. Moves order to PREPARING and sends confirmation email."
                     }
                 }
             ]
